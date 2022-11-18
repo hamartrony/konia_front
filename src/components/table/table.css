@@ -1,6 +1,5 @@
 table {
   width: 800px;
-  /* height: 300px; */
   border-collapse: collapse;
 }
 
@@ -8,19 +7,19 @@ thead tr th {
   background-color: blue;
   border: 1px solid white;
   text-align: center;
+  padding-top: 10px;
   color: white;
   height: 30px;
   font-family: sans-serif;
 }
 
 tbody {
-  height: 200px;
   background-color: rgb(196, 198, 199);
   font-family: sans-serif;
 }
 
 tbody tr th {
-  height: 20px;
+  padding: 7px;
   border-right: 1px solid white;
 }
 

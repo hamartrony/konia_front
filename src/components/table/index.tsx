@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ApiService } from "../../services/ApiServices";
-import "./index.css";
+import "./table.css";
 
 type IItem = {
   nome: string;

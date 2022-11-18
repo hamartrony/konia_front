@@ -6,6 +6,10 @@ interface IItem {
   id: number;
 }
 
+interface INome {
+  nome: string;
+}
+
 const getAll = async (): Promise<IItem[] | Error> => {
   try {
     const { data } = await Api.get("/items/");
@@ -22,10 +26,11 @@ const getAll = async (): Promise<IItem[] | Error> => {
 };
 
 const create = async (
-  dados: Omit<IItem, "id , data_criacao">
+  // dados: Omit<IItem, "id , data_criacao">
+  dados: INome
 ): Promise<number | Error> => {
   try {
-    const { data } = await Api.post<IItem>("/item/");
+    const { data } = await Api.post<IItem>("/items/");
     if (data) {
       return data.id;
     }
