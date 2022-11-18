@@ -5,21 +5,23 @@ import Button from "./components/button";
 import Table from "./components/table";
 
 function App() {
-  const [add, setAdd] = useState(false);
+  // state para ativar modal
+  const [modal, setModal] = useState(false);
 
-  const addItem = () => {
-    setAdd(add === true ? false : true);
+  // funcao para alterar state do modal
+  const handleModal = () => {
+    setModal(modal === true ? false : true);
   };
 
   return (
     <div className="App">
-      {add === true ? (
-        <AddItem func={addItem} />
+      {modal === true ? (
+        <AddItem setModal={handleModal} />
       ) : (
         <section>
           <h1>Itens do inventário</h1>
 
-          <Button func={addItem} title="+ novo item" />
+          <Button func={handleModal} title="+ novo item" />
           <Table />
         </section>
       )}

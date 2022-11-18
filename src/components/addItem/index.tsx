@@ -4,30 +4,38 @@ import Button from "../button";
 import "./addItem.css";
 
 interface Props {
-  func: () => void;
-  data: {};
+  setModal: () => void;
 }
 
-export default function AddItem({ func }: Props) {
+interface INome {
+  nome: string;
+}
+
+export default function AddItem({ setModal }: Props) {
+  // state que armazena dados digitados
   const [value, setValue] = useState("");
 
-  const handleSave = (data: string) => {
-    const send = { nome: data };
-    console.log(send);
-    ApiService.create(send).then((result) => {
-      if (result instanceof Error) {
-        alert(result.message);
-        return;
-      } else {
-        alert("Produto adicionado!");
-      }
-    });
-    return console.log("salvou");
+  // funcao para salvar item
+  const handleSave = () => {
+    if (value === "") {
+      alert("É necessário digitar um nome!");
+    } else {
+      const send: INome = { nome: value };
+      ApiService.create(send).then((result) => {
+        if (result instanceof Error) {
+          alert(result.message);
+          return;
+        } else {
+          alert("Produto adicionado!");
+        }
+      });
+    }
+    return;
   };
 
   const handleCancelar = () => {
-    func();
-    return console.log("salvou");
+    setModal();
+    return;
   };
 
   return (
@@ -35,15 +43,17 @@ export default function AddItem({ func }: Props) {
       <div className="title">
         <p>Digite o nome do Produto:</p>
       </div>
-
-      <input
-        placeholder="Produto"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      ></input>
+      <label>
+        Nome:
+        <input
+          placeholder="Produto"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        ></input>
+      </label>
       <div className="buttons">
-        <Button func={() => handleSave(value)} title="Salvar" />
-        <Button func={handleCancelar} title="Cancelar" />
+        <Button func={handleSave} title="Salvar" />
+        <Button func={handleCancelar} title="Voltar" />
       </div>
     </div>
   );

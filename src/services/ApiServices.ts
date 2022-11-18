@@ -25,14 +25,11 @@ const getAll = async (): Promise<IItem[] | Error> => {
   }
 };
 
-const create = async (
-  // dados: Omit<IItem, "id , data_criacao">
-  dados: INome
-): Promise<number | Error> => {
+const create = async (dados: INome): Promise<number | Error> => {
   try {
-    const { data } = await Api.post<IItem>("/items/");
+    const { data } = await Api.post("/items/", dados);
     if (data) {
-      return data.id;
+      return data;
     }
     return new Error("Erro ao criar Item");
   } catch (error) {
